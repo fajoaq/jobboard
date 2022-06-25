@@ -1,13 +1,50 @@
 ---
 layout: default
-title: App
+title: Job Board
 path: home
 ---
 
 <div
-  class="container mx-auto min-h-screen pt-32 flex flex-col justify-center items-center"
+  class="container mx-auto min-h-screen pt-32 flex flex-col justify-start items-center"
+  x-init="$watch(editModal, val => modalhandler(val)); $watch(newModal, val => modalhandler(val))"
+  x-data="{ 
+    newModal: false,
+    editModal: false,
+    admin: false,
+    jobList: $persist([ 
+    { 
+      id: '1', title: 'Back End Developer', type:
+      'Full-time', location: 'Remote', category: 'Engineering', apply: '' },
+    { 
+      id: '2', title:
+      'User Interface Engineer', type: 'Part-time', location: 'Remote', category:
+      'Design', apply: '' 
+    }]),
+    activeJob: { 
+      title: '', type:
+      '', location: '', category: '', apply: '' 
+    },
+
+    removeJob(id ){
+      const find = this.jobList.find((item) => item.id === id)
+      if(find) this.jobList.splice(this.jobList.indexOf(find) , 1)
+    },
+    editJob(id ){
+      this.editModal = true;
+      this.activeJob = this.jobList.find((item) => item.id === id)
+    },
+    updateJob(id){   
+      console.log(id) 
+      const find = this.jobList.find((item) => item.id === id)
+      if(find) this.jobList.splice(this.jobList.indexOf(find) , 1, this.activeJob)
+
+      this.editModal = false;
+    },
+  }"
 >
-  <h1 class="pb-16">
+  <!-- modal -->
+  {% include "./_includes/partials/modal.html" %}
+  <h1 class="pb-12">
     Welcome to
     <strong
       class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500"
@@ -15,4 +52,54 @@ path: home
       {{title}}
     </strong>
   </h1>
+
+  <div class="w-full sm:px-6">
+    <div
+      class="px-4 md:px-10 py-4 md:py-7 bg-gray-100 dark:bg-gray-700 rounded-tl-lg rounded-tr-lg"
+    >
+      <div class="sm:flex items-center justify-between">
+        <div class="flex items-center gap-x-6">
+          <p
+            tabindex="0"
+            class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 dark:text-white"
+          >
+            Job Position
+          </p>
+          <span class="text-purple-400 cursor-pointer" @click="admin=!admin"
+            >Admin</span
+          >
+        </div>
+
+        <button
+          class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded text-gray-800 dark:text-white"
+          x-show="admin"
+          @click="newModal=true; activeJob={}"
+        >
+          Add Position
+        </button>
+      </div>
+    </div>
+    <div
+      class="bg-white dark:bg-gray-800 shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto"
+    >
+      <table class="w-full whitespace-nowrap">
+        <thead>
+          <tr
+            tabindex="0"
+            class="focus:outline-none h-16 w-full text-sm leading-none text-gray-800 dark:text-white"
+          >
+            <th class="font-normal text-left pl-4">Position</th>
+            <th class="font-normal text-left pl-4">Category</th>
+            <th class="font-normal pl-4">
+              <div class="flex justify-end pl-4 px-7 mr-2 2xl:px-0">
+                <p class="w-28 px-4">Apply</p>
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        {% include "./_includes/partials/tbody.html" %}
+      </table>
+    </div>
+  </div>
 </div>

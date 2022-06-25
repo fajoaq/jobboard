@@ -9,23 +9,16 @@
     <meta name="description" content="{{description}}" />
     {% endif %} {% block head %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/css/ol.css"
-      type="text/css"
-    />
-    {% if prism == true %}
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/static/css/prism-tomorrow.css"
-    />
-    {% endif %}
   </head>
   <body>
     {% include "./partials/navbar.html" %} {{ content | safe }} {% include
     "./partials/footer.html" %}
 
-    <script src="/static/js/alpine.js"></script>
+    <script
+      defer
+      src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script defer src="/static/js/alpine.js"></script>
+    <script defer src="/static/js/modalhandler.js" defer></script>
   </body>
 </html>

@@ -1,0 +1,173 @@
+<div
+  id="popup"
+  class="z-50 fixed w-full flex justify-center inset-0"
+  x-cloak
+  x-show="newModal === true || editModal === true"
+  x-effect="populate(activeJob)"
+  x-data="{editableJob: {test: 'true'}, populate(data) {
+    this.editableJob = {...data}
+  }}"
+>
+  <div
+    class="w-full h-full bg-gray-900/[.99] z-0 absolute inset-0"
+    @click="newModal=false; editModal=false;"
+  ></div>
+  <div class="mx-auto container">
+    <div class="flex items-center justify-center h-full w-full">
+      <div
+        class="bg-white dark:bg-gray-800 rounded-md shadow fixed overflow-y-auto sm:h-auto w-10/12 md:w-8/12 lg:w-1/2 2xl:w-2/5"
+      >
+        <div
+          class="bg-gray-100 dark:bg-gray-600 rounded-tl-md rounded-tr-md px-4 md:px-8 md:py-4 py-7 flex items-center justify-between"
+        >
+          <p
+            class="text-base font-semibold text-white light:text-black"
+            x-text="newModal ? 'Create a New Job' : 'Edit Job'"
+          >
+            Create New Job
+          </p>
+          <button
+            role="button"
+            type="button"
+            aria-label="close label"
+            class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 focus:outline-none"
+            @click="newModal=false; editModal=false; "
+          >
+            <img
+              src="https://tuk-cdn.s3.amazonaws.com/can-uploader/add_user-svg1.svg"
+              alt="icon"
+            />
+          </button>
+        </div>
+
+        <div class="px-4 md:px-10 pt-6 md:pt-12 md:pb-4 pb-7">
+          <!-- form -->
+          <form x-ref="jobform" class="mt-11">
+            <div class="flex items-center gap-x-6">
+              <input
+                required
+                name="title"
+                type="text"
+                placeholder="Job Title"
+                class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-500 light:text-black bg-white dark:bg-gray-900 border rounded border-gray-200 dark:border-gray-700"
+                x-model="editableJob.title"
+              />
+
+              <div
+                class="focus:outline-none focus:ring-2 focus:ring-gray-400 w-1/2 bg-white dark:bg-gray-900 border rounded border-gray-200 dark:border-gray-700 py-2.5 px-3"
+              >
+                <select
+                  required
+                  name="location"
+                  type="text"
+                  aria-label="select an option"
+                  class="text-sm text-gray-500 light:text-black dark:bg-gray-900 w-full focus:outline-none"
+                  id="category"
+                  x-model="editableJob.location"
+                >
+                  <option selected="" disabled="" value="">Location</option>
+                  <option>Remote</option>
+                  <option>On-site</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex items-center gap-x-6 mt-6">
+              <input
+                required
+                name="type"
+                type="text"
+                placeholder="Type"
+                class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-500 light:text-black bg-white dark:bg-gray-900 border rounded border-gray-200 dark:border-gray-700"
+                x-model="editableJob.type"
+              />
+              <div
+                class="focus:outline-none focus:ring-2 focus:ring-gray-400 w-1/2 bg-white dark:bg-gray-900 border rounded border-gray-200 dark:border-gray-700 py-2.5 px-3"
+              >
+                <select
+                  required
+                  name="category"
+                  type="text"
+                  aria-label="select an option"
+                  class="text-sm text-gray-500 light:text-black dark:bg-gray-900 w-full focus:outline-none"
+                  id="category"
+                  x-model="editableJob.category"
+                >
+                  <option selected="" disabled="" value="">Category</option>
+                  <option>Designer</option>
+                  <option>Developer</option>
+                  <option>Engineering</option>
+                  <option>Manager</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-6">
+              <textarea
+                name="message"
+                placeholder="Description"
+                class="focus:outline-none focus:ring-2 focus:ring-gray-400 dark:bg-gray-900 py-3 pl-3 overflow-y-auto h-24 border placeholder-gray-500 rounded border-gray-200 dark:border-gray-700 w-full resize-none focus:outline-none text-white light:text-black"
+              ></textarea>
+            </div>
+            <div class="flex justify-end items-center mb-6 mt-6">
+              <input
+                type="url"
+                name="url"
+                id="url"
+                placeholder="https://example.com"
+                pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?"
+                class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-500 light:text-black bg-white dark:bg-gray-900 border rounded border-gray-200 dark:border-gray-700"
+                x-model="editableJob.apply"
+              />
+            </div>
+            <!-- submission/cancel -->
+            <div class="flex items-center justify-between mt-9">
+              <button
+                role="button"
+                type="button"
+                aria-label="close button"
+                class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-600 focus:ring-gray-600 focus:outline-none px-6 py-3 bg-gray-600 hover:bg-gray-500 shadow rounded text-sm text-white"
+                @click="newModal=false; editModal=false;"
+              >
+                Cancel
+              </button>
+
+              <input
+                type="submit"
+                name="submit"
+                value="Submit"
+                aria-hidden="true"
+                aria-label="add user"
+                role="button"
+                x-ref="submitbutton"
+                class="h-0 pointer-events-none"
+              />
+
+              <button
+                type="button"
+                aria-label="add user"
+                aria-roledescription="submit"
+                role="button"
+                class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-800 focus:outline-none px-6 py-3 bg-indigo-700 hover:bg-opacity-80 shadow rounded text-sm text-white"
+                x-text="newModal ? 'Post Job' : 'Update Job'"
+                @click="
+                  if(modalValidation({form: $refs.jobform, submit: $refs.submitbutton})){
+                    activeJob = {...editableJob};
+
+                    if(newModal)
+                      jobList.unshift(activeJob)
+                    if(editModal)
+                      updateJob(activeJob.id)
+
+                    editModal = false;
+                    newModal = false;
+                  }
+                "
+              >
+                Post Job
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

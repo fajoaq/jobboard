@@ -1,0 +1,71 @@
+<!-- table body -->
+<tbody class="w-full">
+  <template x-for="job in jobList">
+    <tr
+      tabindex="0"
+      class="focus:outline-none h-20 text-sm leading-none text-gray-800 dark:text-white bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 border-b border-t border-gray-100 dark:border-gray-700 my-4"
+    >
+      <td class="pl-4 cursor-pointer">
+        <div class="flex items-center">
+          <!-- admin panel -->
+          <div class="mr-4" x-show="admin">
+            <img
+              height="22px"
+              width="22px"
+              src="/static/img/edit.svg"
+              alt=""
+              class="edit_posting mb-2 cursor-pointer"
+              @click="editJob(job.id)"
+            />
+
+            <img
+              height="22px"
+              width="22px"
+              src="/static/img/delete.svg"
+              alt=""
+              class="del_posting cursor-pointer"
+              @click="removeJob(job.id)"
+            />
+          </div>
+          <div class="pl-4">
+            <p class="font-medium" x-text="job.title">
+              UX Design &amp; Visual Strategy
+            </p>
+            <p class="text-xs leading-3 text-gray-600 dark:text-gray-200 pt-2">
+              <span class="map_pin"></span>
+              <span x-text="job.location">Remote</span>
+              <span x-text="job.type">Full-time</span>
+            </p>
+          </div>
+        </div>
+      </td>
+
+      <td class="pl-4">
+        <div class="flex items-center">
+          <p class="font-medium" x-text="job.category">UX Strategy</p>
+        </div>
+      </td>
+
+      <td class="flex justify-end pl-4 px-7 2xl:px-0">
+        <button
+          class="w-28 h-12 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 px-4 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded mr-2"
+          role="button"
+          aria-label="options"
+        >
+          <p
+            class="text-sm font-medium leading-none text-white"
+            x-text="job.apply === '' ? 'Quick Apply' : 'On Website'"
+          >
+            On Website
+          </p>
+        </button>
+      </td>
+    </tr>
+  </template>
+</tbody>
+
+<!--           onclick="dropdownFunction(this)" <img
+            class="w-5"
+            src="https://tuk-cdn.s3.amazonaws.com/can-uploader/table_3-svg1.svg"
+            alt="dropdown"
+          /> -->

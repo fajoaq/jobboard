@@ -12,19 +12,55 @@ h3 {
   @apply text-2xl font-bold mb-3;
 }
 
-.map {
-  height: 100%;
-  width: 100%;
-}
-.ol-layer {
-  display: flex;
-  align-items: center;
-  background-color: transparent;
+[x-cloack] {
+  display: none !important;
 }
 
-.ol-zoom {
-  display: flex;
-  flex-direction: row-reverse;
+table {
+  /* Will be ignored */
+  height: 1px !important;
+}
+tr {
+  height: 100% !important;
+}
+td {
+  height: 100% !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+td > div {
+  height: 100% !important;
+}
+
+.map_pin {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 5px solid #a069f7;
+  border-radius: 100%;
+}
+
+.map_pin::after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin: 1px 0 0 -6px;
+  display: block;
+  content: "";
+  border: 6px solid transparent;
+  border-top: 10px solid #a069f7;
+  border-bottom: none;
+}
+
+.edit_posting {
+  filter: invert(65%) sepia(19%) saturate(7317%) hue-rotate(198deg)
+    brightness(100%) contrast(94%);
+}
+.del_posting {
+  filter: invert(42%) sepia(77%) saturate(3230%) hue-rotate(245deg)
+    brightness(98%) contrast(98%);
 }
 
 /* Syntax Highlighting*/
