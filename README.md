@@ -1,8 +1,8 @@
 <h1 align="center">
   <br>
-  <a href="https://locatorapp.vercel.app/"><img src="/src/static/img/site-image.jpg" alt="Alpinejs App by Francis Joaquin" width="383"></a>
+  <a href="https://jobboards.vercel.app/"><img src="/src/static/img/site-image.jpg" alt="Alpinejs App by Francis Joaquin" width="383"></a>
   <br>
-    App
+    Job Board App
   <br>
 </h1>
 
@@ -27,7 +27,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/fajoaq/location-app
+$ git clone https://github.com/fajoaq/jobboards
 
 # Go into the repository
 $ cd joaquinc-main
